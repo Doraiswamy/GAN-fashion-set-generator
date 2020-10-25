@@ -491,7 +491,7 @@ def cnn_classification():
 
     # define ensemble model
     Classification_model = define_stacked_model(members)
-    filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\test\\pattern_pred_conv.hdf5'
+    filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\pattern_pred_conv.hdf5'
     Classification_model.load_weights(filepath_pattern)
     shape = (256, 256)
     labelname = ['floral', 'lace', 'polkadots', 'print', 'stripes', 'unicolors']
@@ -506,7 +506,7 @@ def cnn_classification():
     print(pattern)
 
     Classification_model_sleeve_length = createModel_sleevelength()
-    filepath_sleeve_length = os.getcwd() + r'\\GarmentClassification\\deployment\\test\\sleeve_length_pred_conv_5.hdf5'
+    filepath_sleeve_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\sleeve_length_pred_conv_5.hdf5'
     Classification_model_sleeve_length.load_weights(filepath_sleeve_length)
     shape = (256, 256)
     sleeve_labelname = ['half', 'long', 'short', 'sleeveless']
@@ -521,7 +521,7 @@ def cnn_classification():
     print(sleeve_label)
 
     Classification_model_length = createModel_length()
-    filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\test\\length_pred_conv_n.hdf5'
+    filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\length_pred_conv_n.hdf5'
     Classification_model_length.load_weights(filepath_length)
     shape = (256, 256)
     length_labelname = ['3-4', 'knee', 'long', 'normal', 'short']
