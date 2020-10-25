@@ -24,6 +24,7 @@ from tensorflow.keras.layers import GlobalAveragePooling2D, Lambda
 from numpy import argmax
 from tensorflow.keras import backend
 import os
+import base64
 import glob
 import cv2
 import numpy as np
@@ -32,9 +33,14 @@ from numba import cuda
 from .fetch_colour import detect_colour
 
 
-def cnn_classification():
+def cnn_classification(request):
 
-    imgpath = r"C:\Users\Nachiketh Doraiswamy\Downloads\9878040.jpg"
+    imgpath_base64 = request.data['imgFile']
+
+    imgdata = base64.b64decode(imgpath_base64)
+    imgpath = 'test.jpg'
+    with open(imgpath, 'wb') as f:
+        f.write(imgdata)
 
     imgrows, imgclms, channel, num_classes = 256, 256, 3, 6
 
@@ -542,4 +548,5 @@ def cnn_classification():
     device.reset()
     prediction_dictionary = {'pattern': pattern[0], 'sleeve_length': sleeve_label[0], 'length': length_label[0]}
     prediction_dictionary.update(detected_colour)
+    os.remove(imgpath)
     return prediction_dictionary
