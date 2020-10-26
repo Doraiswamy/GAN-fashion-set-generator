@@ -30,7 +30,14 @@ import cv2
 import numpy as np
 from numba import cuda
 
+from numpy.random import seed
+import tensorflow
+tensorflow.random.set_seed(42)
+from tensorflow.keras import models, Model, optimizers
+
 from .fetch_colour import detect_colour
+
+seed(1337)
 
 
 def cnn_classification(request):
@@ -93,53 +100,60 @@ def cnn_classification(request):
 
     model = createModel_1()  # This is meant for training
 
-    def createModel_2():
-        imgrows, imgclms, channel, num_classes = 256, 256, 3, 6
-        optmz = optimizers.RMSprop(lr=0.0001)
-        inputs = Input(shape=(imgrows, imgclms, channel))
-        x = Conv2D(32, (3, 3), padding='same')(inputs)
-        x = BatchNormalization()(x)
-        x = Activation('relu')(x)
-        x = Dropout(0.25)(x)
-        y = x
-        x = Conv2D(32, (3, 3), padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Activation('relu')(x)
-        x = add([x, y])
-        x = MaxPooling2D(pool_size=(2, 2))(x)
-        x = Conv2D(32, (3, 3), padding='same')(x)
-        x = Activation('relu')(x)
-        x = MaxPooling2D(pool_size=(2, 2))(x)
-        x = Conv2D(64, (3, 3), padding='same')(x)
-        x = Activation('relu')(x)
-        x = Dropout(0.25)(x)
-        y = x
-        x = Conv2D(64, (3, 3), padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Activation('relu')(x)
-        x = add([x, y])
-        x = MaxPooling2D(pool_size=(2, 2))(x)
-        x = Conv2D(128, (3, 3), padding='same', kernel_regularizer=regularizers.l2(0.001))(x)
-        x = BatchNormalization()(x)
-        x = Activation('relu')(x)
-        x = Dropout(0.25)(x)
-        x = Conv2D(128, (3, 3), padding='same', kernel_regularizer=regularizers.l2(0.001))(x)
-        x = Activation('relu')(x)
-        x = MaxPooling2D(pool_size=(2, 2))(x)
-        x = Flatten()(x)
-        x = Dense(64, activation='relu')(x)
-        x = Dropout(0.5)(x)
-        x = Dense(num_classes, activation='softmax')(x)
+    # def createModel_2():
+    #     imgrows, imgclms, channel, num_classes = 256, 256, 3, 6
+    #     optmz = optimizers.RMSprop(lr=0.0001)
+    #     inputs = Input(shape=(imgrows, imgclms, channel))
+    #     x = Conv2D(32, (3, 3), padding='same')(inputs)
+    #     x = BatchNormalization()(x)
+    #     x = Activation('relu')(x)
+    #     x = Dropout(0.25)(x)
+    #     y = x
+    #     x = Conv2D(32, (3, 3), padding='same')(x)
+    #     x = BatchNormalization()(x)
+    #     x = Activation('relu')(x)
+    #     x = add([x, y])
+    #     x = MaxPooling2D(pool_size=(2, 2))(x)
+    #     x = Conv2D(32, (3, 3), padding='same')(x)
+    #     x = Activation('relu')(x)
+    #     x = MaxPooling2D(pool_size=(2, 2))(x)
+    #     x = Conv2D(64, (3, 3), padding='same')(x)
+    #     x = Activation('relu')(x)
+    #     x = Dropout(0.25)(x)
+    #     y = x
+    #     x = Conv2D(64, (3, 3), padding='same')(x)
+    #     x = BatchNormalization()(x)
+    #     x = Activation('relu')(x)
+    #     x = add([x, y])
+    #     x = MaxPooling2D(pool_size=(2, 2))(x)
+    #     x = Conv2D(128, (3, 3), padding='same', kernel_regularizer=regularizers.l2(0.001))(x)
+    #     x = BatchNormalization()(x)
+    #     x = Activation('relu')(x)
+    #     x = Dropout(0.25)(x)
+    #     x = Conv2D(128, (3, 3), padding='same', kernel_regularizer=regularizers.l2(0.001))(x)
+    #     x = Activation('relu')(x)
+    #     x = MaxPooling2D(pool_size=(2, 2))(x)
+    #     x = Flatten()(x)
+    #     x = Dense(64, activation='relu')(x)
+    #     x = Dropout(0.5)(x)
+    #     x = Dense(num_classes, activation='softmax')(x)
+    #
+    #     model = Model(inputs=inputs, outputs=x)
+    #
+    #     model.compile(loss='categorical_crossentropy',
+    #                   optimizer=optmz,
+    #                   metrics=['accuracy'])
+    #
+    #     return model
+    #
+    # model_1 = createModel_2()
 
-        model = Model(inputs=inputs, outputs=x)
-
-        model.compile(loss='categorical_crossentropy',
-                      optimizer=optmz,
-                      metrics=['accuracy'])
-
-        return model
-
-    model_1 = createModel_2()
+    modelname = 'pattern_pred_vgg_5'  # Step 1
+    folderpath = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\'
+    filepath = folderpath + modelname + ".hdf5"
+    model_1 = models.load_model(filepath)
+    # model_1.layers[-3].name='dense1'
+    model_1.layers[-1]._name = 'dense_final'
 
     def resLyr(inputs,
                numFilters=16,
@@ -497,7 +511,7 @@ def cnn_classification(request):
 
     # define ensemble model
     Classification_model = define_stacked_model(members)
-    filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\pattern_pred_conv.hdf5'
+    filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\stacked_model_6.hdf5'
     Classification_model.load_weights(filepath_pattern)
     shape = (256, 256)
     labelname = ['floral', 'lace', 'polkadots', 'print', 'stripes', 'unicolors']
