@@ -50,7 +50,7 @@ def generator_test():
     # ###initialising new class
     netG1 = G()
     # ### loading pre trained weights
-    netG1.load_state_dict(torch.load(os.getcwd()+"//FashionSetGeneration//deployment//generator.pth"))
+    netG1.load_state_dict(torch.load(os.getcwd()+"/FashionSetGeneration/deployment/generator.pth"))
     noise = Variable(torch.randn(16, 100, 1, 1))
     fake = netG1(noise)
 
@@ -61,6 +61,6 @@ def generator_test():
         imshow(fake.data[idx])
         
     fig.savefig('FashionSetGeneration/deployment/GANgenerator.jpg')
-    return {'image_path': os.getcwd()+'\\FashionSetGeneration\\deployment\\GANgenerator.jpg'}
+    return {'image_path': os.getcwd()+'/FashionSetGeneration/deployment/GANgenerator.jpg'}
 
 

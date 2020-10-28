@@ -99,7 +99,7 @@ def cnn_classification(request):
     model = createModel_1()  # This is meant for training
 
     modelname = 'pattern_pred_vgg_5'  # Step 1
-    folderpath = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\'
+    folderpath = os.getcwd() + r'/GarmentClassification/deployment/weights/'
     filepath = folderpath + modelname + ".hdf5"
     model_1 = models.load_model(filepath)
     model_1.layers[-1]._name = 'dense_final'
@@ -469,7 +469,7 @@ def cnn_classification(request):
 
     # ####################define ensemble model for pattern################################
     Classification_model = define_stacked_model(members)
-    filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\stacked_model_6.hdf5'
+    filepath_pattern = os.getcwd() + r'/GarmentClassification/deployment/weights/stacked_model_6.hdf5'
     Classification_model.load_weights(filepath_pattern)
     shape = (256, 256)
     labelname = ['floral', 'lace', 'polkadots', 'print', 'stripes', 'unicolors']
@@ -485,7 +485,7 @@ def cnn_classification(request):
 
     # ###########################Sleeve length################################
     Classification_model_sleeve_length = createModel_sleevelength()
-    filepath_sleeve_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\sleeve_length_pred_conv_5.hdf5'
+    filepath_sleeve_length = os.getcwd() + r'/GarmentClassification/deployment/weights/sleeve_length_pred_conv_5.hdf5'
     Classification_model_sleeve_length.load_weights(filepath_sleeve_length)
     shape = (256, 256)
     sleeve_labelname = ['half', 'long', 'short', 'sleeveless']
@@ -501,7 +501,7 @@ def cnn_classification(request):
 
     # ###################Neckline###################################################################
     Classification_model_neckline = createModel_neckline()
-    filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\neckline_classifier.h5'
+    filepath_length = os.getcwd() + r'/GarmentClassification/deployment/weights/neckline_classifier.h5'
     Classification_model_neckline.load_weights(filepath_length)
     shape = (256, 256)
     neckline_labelname = ['back', 'deep', 'lined', 'round', 'v-shaped',
@@ -518,7 +518,7 @@ def cnn_classification(request):
 
     # ################################Dress length####################################################
     Classification_model_length = createModel_length()
-    filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\length_pred_conv_n.hdf5'
+    filepath_length = os.getcwd() + r'/GarmentClassification/deployment/weights/length_pred_conv_n.hdf5'
     Classification_model_length.load_weights(filepath_length)
     shape = (256, 256)
     length_labelname = ['3-4', 'knee', 'long', 'normal', 'short']

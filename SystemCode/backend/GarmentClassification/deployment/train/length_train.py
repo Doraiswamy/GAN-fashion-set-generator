@@ -28,7 +28,7 @@ df = df.reset_index(drop=True)
 images = []
 img_labels = []
 for i in range(int(len(df))):
-    img = cv2.imread(os.getcwd() + r'\FashionSetGeneration\images\fashion\\' + df['img_path'][i])
+    img = cv2.imread(os.getcwd() + r'/FashionSetGeneration/images/fashion/' + df['img_path'][i])
     images.append(img)
     img_labels.append(df['length'][i])
 
@@ -136,14 +136,14 @@ plt.plot(history.history['loss'], label='Loss')
 plt.plot(history.history['val_loss'], label='val_Loss')
 plt.legend()
 plt.title('Loss evolution')
-# plt.savefig(os.getcwd() + '\GarmentClassification\deployment\length_train_loss.jpg')
+# plt.savefig(os.getcwd() + '/GarmentClassification/deployment/length_train_loss.jpg')
 
 plt.subplot(2, 2, 2)
 plt.plot(history.history['accuracy'], label='accuracy')
 plt.plot(history.history['val_accuracy'], label='val_accuracy')
 plt.legend()
 plt.title('Accuracy evolution')
-# plt.savefig(os.getcwd() + '\GarmentClassification\deployment\length_train_accuracy.jpg')
+# plt.savefig(os.getcwd() + '/GarmentClassification/deployment/length_train_accuracy.jpg')
 
 model.save_weights(filepath)
 modelGo.load_weights(filepath)
