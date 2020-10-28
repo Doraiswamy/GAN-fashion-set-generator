@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad4b2ac8-9289-42ca-a591-ef4e3fb632eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/SystemCode/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemCode/backend/FashionSetGeneration/deployment/gan_deployment.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/FashionSetGeneration/deployment/gan_deployment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/deployment/test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/deployment/test/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/deployment/train/length_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/deployment/train/length_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemCode/backend/FashionSetGeneration/deployment/GANgenerator.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/FashionSetGeneration/deployment/GANgenerator.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SystemCode/backend/GarmentClassification/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +41,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/SystemCode/backend" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -70,9 +69,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603730231068">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603908971196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603730231068" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603908971196" />
   </component>
 </project>

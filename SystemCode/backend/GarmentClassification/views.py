@@ -6,7 +6,7 @@ from GarmentClassification.deployment.test.test import cnn_classification
 
 class EnsembleClassification(views.APIView):
 
-    def get(self, request):
+    def post(self, request):
         classification_response = cnn_classification(request)
         return Response(data=classification_response, status=status.HTTP_200_OK)
 
