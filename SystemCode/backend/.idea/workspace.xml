@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0072035e-73cf-4d17-b1fa-6735d9c54a31" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarmentClassification/deployment/weights/neckline_classifier.h5" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
