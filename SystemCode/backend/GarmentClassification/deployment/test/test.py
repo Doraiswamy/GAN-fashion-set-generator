@@ -5,18 +5,18 @@ Created on Thu Oct 22 11:01:07 2020
 @author: DELL
 """
 
+from tensorflow.keras import layers
 from tensorflow.keras.layers import Dropout
 from tensorflow.keras.layers import Flatten
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import BatchNormalization
+from tensorflow.keras.applications import vgg16
 from tensorflow.keras.layers import Activation
-from tensorflow.keras import optimizers
 from tensorflow.keras import regularizers
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.layers import add
 from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Concatenate
@@ -32,6 +32,7 @@ from numba import cuda
 
 from numpy.random import seed
 import tensorflow
+
 tensorflow.random.set_seed(42)
 from tensorflow.keras import models, Model, optimizers
 
@@ -41,7 +42,6 @@ seed(1337)
 
 
 def cnn_classification(request):
-
     imgpath_base64 = request.data['imgFile']
 
     imgdata = base64.b64decode(imgpath_base64)
@@ -426,6 +426,15 @@ def cnn_classification(request):
 
         return model
 
+    def createModel_neckline():
+        img_height, img_width = 256, 256
+        conv_base = vgg16.VGG16(weights='imagenet', include_top=False, pooling='max',
+                                input_shape=(img_width, img_height, 3))
+        neckline_model = models.Sequential()
+        neckline_model.add(conv_base)
+        neckline_model.add(layers.Dense(6, activation='softmax'))
+        return neckline_model
+
     def createModel_length():
         imgrows, imgclms, channel, num_classes = 256, 256, 3, 5
         optmz = optimizers.RMSprop(lr=0.0001)
@@ -485,14 +494,14 @@ def cnn_classification(request):
         return model
 
     # fit a stacked model
-    # def fit_stacked_model(model, inputX, inputy):
-    #     # prepare input data
-    #     X = [inputX for _ in range(len(model.input))]
-    #     # encode output data
-    #     inputy_enc = inputy
-    #     # fit model
-    #     history = model.fit(X, inputy_enc, epochs=20, verbose=1)
-    #     return history
+    def fit_stacked_model(model, inputX, inputy):
+        # prepare input data
+        X = [inputX for _ in range(len(model.input))]
+        # encode output data
+        inputy_enc = inputy
+        # fit model
+        history = model.fit(X, inputy_enc, epochs=20, verbose=1)
+        return history
 
     # ## make a prediction with a stacked model
     def predict_stacked_model(model, inputX):
@@ -509,7 +518,7 @@ def cnn_classification(request):
     members = all_models
     print('Loaded %d models' % len(members))
 
-    # define ensemble model
+    # ####################define ensemble model for pattern################################
     Classification_model = define_stacked_model(members)
     filepath_pattern = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\stacked_model_6.hdf5'
     Classification_model.load_weights(filepath_pattern)
@@ -525,6 +534,7 @@ def cnn_classification(request):
     pattern = [labelname[i] for i in argmax(yhat, axis=1)]
     print(pattern)
 
+    # ###########################Sleeve length################################
     Classification_model_sleeve_length = createModel_sleevelength()
     filepath_sleeve_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\sleeve_length_pred_conv_5.hdf5'
     Classification_model_sleeve_length.load_weights(filepath_sleeve_length)
@@ -540,6 +550,24 @@ def cnn_classification(request):
     sleeve_label = [sleeve_labelname[i] for i in argmax(yhat, axis=1)]
     print(sleeve_label)
 
+    # ###################Neckline###################################################################
+    Classification_model_neckline = createModel_neckline()
+    filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\neckline_classifier.h5'
+    Classification_model_neckline.load_weights(filepath_length)
+    shape = (256, 256)
+    neckline_labelname = ['back', 'deep', 'lined', 'round', 'v-shaped',
+                          'wide']
+    images = []
+    for img in glob.glob(imgpath):
+        n = cv2.imread(img)
+        n = cv2.resize(n, shape)
+        images.append(n)
+    images = np.array(images)
+    yhat = Classification_model_neckline.predict(images)
+    neckline_label = [neckline_labelname[i] for i in argmax(yhat, axis=1)]
+    print(neckline_label)
+
+    # ################################Dress length####################################################
     Classification_model_length = createModel_length()
     filepath_length = os.getcwd() + r'\\GarmentClassification\\deployment\\weights\\length_pred_conv_n.hdf5'
     Classification_model_length.load_weights(filepath_length)
@@ -550,17 +578,20 @@ def cnn_classification(request):
         n = cv2.imread(img)
         n = cv2.resize(n, shape)
         images.append(n)
+
     images = np.array(images)
     yhat = Classification_model_length.predict(images)
     length_label = [length_labelname[i] for i in argmax(yhat, axis=1)]
     print(length_label)
 
+    # #########################Detect colour##############################################################
     detected_colour = detect_colour(imgpath)
 
     # ### clearing up CUDA GPU
     device = cuda.get_current_device()
     device.reset()
-    prediction_dictionary = {'pattern': pattern[0], 'sleeve_length': sleeve_label[0], 'length': length_label[0]}
+    prediction_dictionary = {'pattern': pattern[0], 'sleeve_length': sleeve_label[0], 'length': length_label[0],
+                             'neckline': neckline_label[0]}
     prediction_dictionary.update(detected_colour)
     os.remove(imgpath)
     return prediction_dictionary
