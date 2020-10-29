@@ -28,8 +28,6 @@ import base64
 import glob
 import cv2
 import numpy as np
-from numba import cuda
-
 from numpy.random import seed
 import tensorflow
 
@@ -37,6 +35,8 @@ tensorflow.random.set_seed(42)
 from tensorflow.keras import models, Model, optimizers
 
 from .fetch_colour import detect_colour
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 seed(1337)
 
@@ -537,8 +537,8 @@ def cnn_classification(request):
     detected_colour = detect_colour(imgpath)
 
     # ### clearing up CUDA GPU
-    device = cuda.get_current_device()
-    device.reset()
+    # device = cuda.get_current_device()
+    # device.reset()
     prediction_dictionary = {'pattern': pattern[0], 'sleeve_length': sleeve_label[0], 'length': length_label[0],
                              'neckline': neckline_label[0]}
     prediction_dictionary.update(detected_colour)

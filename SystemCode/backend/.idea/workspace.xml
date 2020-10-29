@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0072035e-73cf-4d17-b1fa-6735d9c54a31" name="Default Changelist" comment="" />
+    <list default="true" id="0072035e-73cf-4d17-b1fa-6735d9c54a31" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +40,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Adaptive test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
