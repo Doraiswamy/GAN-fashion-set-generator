@@ -24,7 +24,6 @@ from tensorflow.keras.layers import GlobalAveragePooling2D, Lambda
 from numpy import argmax
 from tensorflow.keras import backend
 import os
-import base64
 import glob
 import cv2
 import numpy as np
@@ -42,12 +41,12 @@ seed(1337)
 
 
 def cnn_classification(request):
-    imgpath_base64 = request.data['imgFile']
+    imgpath_base64 = request.FILES['imgFile']
 
-    imgdata = base64.b64decode(imgpath_base64)
     imgpath = 'test.jpg'
-    with open(imgpath, 'wb') as f:
-        f.write(imgdata)
+    with open(imgpath, 'wb+') as destination:
+        for chunk in imgpath_base64.chunks():
+            destination.write(chunk)
 
     imgrows, imgclms, channel, num_classes = 256, 256, 3, 6
 
