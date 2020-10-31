@@ -29,7 +29,8 @@ Using the generative adversarial network, we train the model with large garment 
 
 https://github.com/Doraiswamy/GAN-fashion-set-generator/tree/master/UserGuide
 
-**Back-end** 
+**Back-end**
+ 
 •	Clone the repository https://github.com/Doraiswamy/GAN-fashion-set-generator into a separate directory.
 
 •	Choose the editor of your choice. For example, PyCharm, Spyder etc. Note that this is not a compulsory step, it is only if you want to view the code.
