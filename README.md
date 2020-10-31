@@ -21,7 +21,7 @@ Using the generative adversarial network, we train the model with large garment 
 | -----------------------| -------------| ------------------------|
 | NACHIKETH DORAISWAMY   | A0215523N    | Data cleansing, django application APIs, database design, Github repository, dress length classification, DCGAN model evaluation and comparison, user guide, project report, video presentation
 | LAKSHMI SUBRAMANIAN    | A0215255L    | pattern and sleeve-length classification, colour extraction, DCGAN, user guide, project report
-| YALAVARTI DHARMA TEJA  | A0215457A    | Front end UI development, Video Presentation, Acquiring data for Question Bank, Initial draft of MR rules to generate questions based on student performance, user guide, project report
+| YALAVARTI DHARMA TEJA  | A0215457A    | Front end UI development, GAN implementation, Pattern Classification, Neckline Classification
 
 # SECTION 4 : PROJECT VIDEO DEMONSTRATION
 

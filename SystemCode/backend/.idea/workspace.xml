@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0072035e-73cf-4d17-b1fa-6735d9c54a31" name="Default Changelist" comment="" />
+    <list default="true" id="0072035e-73cf-4d17-b1fa-6735d9c54a31" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/FashionSetGeneration/deployment/GANgenerator.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UserGuide/User Guide Fashion Set Generator.docx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,10 +90,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="267" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1603723763843" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603992204625">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1604139799680">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603992204625" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604139799680" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1603550583025">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
