@@ -2,6 +2,8 @@
 
 ### **FASHION APPAREL GENERATION**
 
+![](SystemCode\backend\FashionSetGeneration\images\manequin.jpg)
+
 # **SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT**
 
 In today’s competitive fashion industry, designers are looking for newer and better ways for designing apparel and launching them into the market. 
