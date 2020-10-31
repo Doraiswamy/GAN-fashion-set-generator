@@ -2,7 +2,7 @@
 
 ### **FASHION APPAREL GENERATION**
 
-![](SystemCode\backend\FashionSetGeneration\images\manequin.jpg)
+![](SystemCode/backend/FashionSetGeneration/images/manequin.jpg)
 
 # **SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT**
 
